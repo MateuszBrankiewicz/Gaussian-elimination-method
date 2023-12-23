@@ -3,7 +3,7 @@
 using namespace std;
 bool check(int n, double** matrix){
     cout<<n;
-    if(matrix[n][n == 0]){
+    if(matrix[n][n ] ==0){
         return false;
     }
     else{
@@ -58,16 +58,19 @@ bool normalGaussMethod(double** matrix, int n,double* values){
 }
 double* solveEquation(double** matrix, int n, double* values,int* indexes){
     double* solution = new double[n];
-    solution[n-1] = values[n-1]/matrix[n-1][n-1];
+    solution[n - 1] = values[n - 1]/matrix[n - 1][n - 1];
     for(int i = n - 2; i >= 0; i--){
-        
+        solution[i] = values[i];
         for(int j = i + 1; j < n; j++){
-            solution[i] = solution[i] - matrix[i][j]/matrix[i][i] * solution[j];
-        }
+            solution[i] = solution[i] - matrix[i][j]*solution[j];
     }
-    for(int i = 0; i < n; i++){
+    solution[i] = solution[i]/matrix[i][i];
+    
+}
+for(int i = 0; i < n; i++){
         cout<<"x"<<indexes[i]<<" = "<<solution[i]<<endl;
     }
+    delete[] solution;
 }
 int main(){
     int n;
@@ -114,5 +117,8 @@ for(int i=0; i<4; i++) {
     else{
         cout<<"You have a zero in a main cross\n";
     }
-    
+    delete[] matrix;
+    delete[] values;
+    delete[] indexes;
+    return 0;
 }
