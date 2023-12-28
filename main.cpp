@@ -41,7 +41,7 @@ for(int i=0; i<4; i++) {
     indexes[2] = 3;
     indexes[3] = 4;
     printData(n, matrix,values);
-    if(normalGaussMethod(matrix, n,values)){
+    if(gausMethodWithMaxRow(matrix, n,values,indexes)){
         printData(n, matrix,values);
         double* equation = solveEquation(matrix, n,values,indexes);
     }

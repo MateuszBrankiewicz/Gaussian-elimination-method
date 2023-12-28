@@ -37,3 +37,32 @@ bool normalGaussMethod(double** matrix, int n,double* values){
             }
             return true;
 }
+bool gausMethodWithMaxRow(double** matrix, int n,double* values, int* indexes){
+    for(int i = 0; i < n; i++){
+        if(check(i,matrix)){
+               for(int j = i + 1; j < n; j++){
+            double ratio = matrix[j][i]/matrix[i][i]; //wyznaczanie p w kroku k 
+            for(int k = 0; k < n; k++){
+                matrix[j][k] = matrix[j][k] - ratio * matrix[i][k]; //zerowanie trojkata
+                if(k == n - 1){
+                values[j] = values[j] - ratio * values[i];
+                }
+            }
+            }
+            
+            }
+    
+    else{
+        bubblesort(matrix,n,i, indexes);
+        for(int j = i + 1; j < n; j++){
+            double ratio = matrix[j][i]/matrix[i][i]; //wyznaczanie p w kroku k 
+            for(int k = 0; k < n; k++){
+                matrix[j][k] = matrix[j][k] - ratio * matrix[i][k]; //zerowanie trojkata
+                if(k == n - 1){
+                values[j] = values[j] - ratio * values[i];
+                }
+            }
+            }
+    }}
+    return true;
+}

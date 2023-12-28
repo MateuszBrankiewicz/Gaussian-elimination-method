@@ -42,11 +42,12 @@ void printData(int n, double** matrix, double* values){
     }
 }
 
-void bubblesort(int** matrix, int n, int row){
+void bubblesort(double** matrix, int n, int row,int* indexes){
     for(int i = 0; i < n - 1; i++){
         for(int j = 0; j < n - i - 1; j++){
             if(matrix[row][j] > matrix[row][j + 1]){
                 swap(matrix[row][j], matrix[row][j + 1]);
+                swap(indexes[j], indexes[j + 1]);
             }
         }
     }
