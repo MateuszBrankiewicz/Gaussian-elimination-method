@@ -42,13 +42,52 @@ void printData(int n, double** matrix, double* values){
     }
 }
 
-void bubblesort(double** matrix, int n, int row,int* indexes){
-    for(int i = 0; i < n - 1; i++){
-        for(int j = 0; j < n - i - 1; j++){
-            if(matrix[row][j] > matrix[row][j + 1]){
-                swap(matrix[row][j], matrix[row][j + 1]);
-                swap(indexes[j], indexes[j + 1]);
+void findMaxColumn(double** matrix,int n,double* values,int i){
+    cout<<"The max element in the column is "<<abs(matrix[i][i])<<endl;
+    double max = abs(matrix[i][i]);
+     int index = i;
+     for(int j = i; j < n; j++){
+         if(abs(matrix[j][i]) > max){
+             max = matrix[j][i];
+             index = j;
+         }
+     } 
+     if(index != i){
+     for(int j = i;j<n;j++){
+        swap(matrix[i][j],matrix[index][j]);
+        swap(values[i],values[index]);
+     }}
+}
+void findMaxInAllMatrix(double** matrix, int n, double* values, int i, int* indexes) {
+    double max = abs(matrix[i][i]);
+    int row = i;
+    int column = i;
+
+ 
+    for (int j = i; j < n; j++) {
+        for (int k = i; k < n; k++) {
+            if (abs(matrix[j][k]) > max) {
+                max = matrix[j][k]; 
+                row = j;
+                column = k;
             }
         }
+    }
+
+   
+    cout << "Max Element Index: (" << row << ", " << column << ")" << endl;
+
+
+    if (row != i) {
+        for (int j = i; j < n; j++) {
+            swap(matrix[i][j], matrix[row][j]);
+        }
+        swap(values[i], values[row]);
+    }
+   if (column != i) {
+        for (int j = 0; j < n; j++) {
+            swap(matrix[j][i], matrix[j][column]);
+        }
+        swap(indexes[i], indexes[column]);
     }
 }
