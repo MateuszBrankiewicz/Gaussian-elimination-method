@@ -4,6 +4,16 @@
 using namespace std;
 double* solveEquation(double** matrix, int n, double* values,int* indexes){
     double* solution = new double[n];
+    if(!check(n-1,matrix)){
+        if(values[n - 1] == 0){
+            cout<<"Uklad tozsamosciowy"<<endl;
+        }
+        else{
+        cout<<"Brak rozwiazania"<<endl;
+        return 0;
+        }
+        
+    }
     solution[n - 1] = values[n - 1]/matrix[n - 1][n - 1];
     for(int i = n - 2; i >= 0; i--){
         solution[i] = values[i];
@@ -13,6 +23,7 @@ double* solveEquation(double** matrix, int n, double* values,int* indexes){
     solution[i] = solution[i]/matrix[i][i];
     
 }
+    bubbleSort(solution,indexes,n);
 for(int i = 0; i < n; i++){
         cout<<"x"<<indexes[i]<<" = "<<solution[i]<<endl;
     }
@@ -22,6 +33,7 @@ bool normalGaussMethod(double** matrix, int n,double* values){
     
     for(int i = 0; i < n; i++){
         if(check(i,matrix)){
+            cout<<matrix[i][i]<<endl;
             fundamentalGaus(matrix,i,values,n);
         }  
         else{
@@ -35,17 +47,15 @@ bool gausMethodWithMaxColumn(double** matrix, int n,double* values,int* indexes)
     for(int i = 0; i < n; i++){
         findMaxColumn(matrix,n,values,i);
         fundamentalGaus(matrix,i,values,n);
-        printData(n,matrix,values);
+        
     }
     return true;
 }
 bool gausWithMax(double** matrix, int n,double* values,int* indexes){
     for(int i = 0; i < n; i++){
         findMaxInAllMatrix(matrix,n,values,i,indexes);
-        cout<<"Po zamianie\n";
-        printData(n,matrix,values);
         fundamentalGaus(matrix,i,values,n);
-        printData(n,matrix,values);
+       
     }
     return true;
 }
