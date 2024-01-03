@@ -6,3 +6,4 @@ void findMaxInAllMatrix(double** matrix, int n,double* values, int i,int* indexe
 int exampleEquations(double**& matrix, double*& values, int*& indexes);
 int copyData(double**& matrix, double*& values,double** matrixToCopy, double* valuesToCopy, int n, int*& indexes);
 void bubbleSort(double* solution, int* indexes, int n);
+double checkEpsilon(double* solution, int i);

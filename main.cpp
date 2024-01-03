@@ -64,7 +64,7 @@ int main(){
             default:
             cout<<"Wrong choice"<<endl;
     }
-  }(while done ==false);
+  }while (done ==false);
     delete[] matrix;
     delete[] values;
     delete[] indexes;

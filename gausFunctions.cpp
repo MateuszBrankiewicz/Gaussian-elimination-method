@@ -4,6 +4,8 @@
 using namespace std;
 double* solveEquation(double** matrix, int n, double* values,int* indexes){
     double* solution = new double[n];
+    cout<<"Matrix after n-1 steps: "<<endl;
+    printData(n,matrix,values);
     if(!check(n-1,matrix)){
         if(values[n - 1] == 0){
             cout<<"Uklad tozsamosciowy"<<endl;
@@ -24,16 +26,21 @@ double* solveEquation(double** matrix, int n, double* values,int* indexes){
     
 }
     bubbleSort(solution,indexes,n);
-for(int i = 0; i < n; i++){
-        cout<<"x"<<indexes[i]<<" = "<<solution[i]<<endl;
+    cout<<"x =[";
+    for(int i = 0; i < n; i++){
+
+        cout<<checkEpsilon(solution,i)<<" ";
     }
+    cout<<"]^T"<<endl;
+    for(int i = 0; i < n; i++){
+            cout<<"x"<<indexes[i]<<" = "<<checkEpsilon(solution,i)<<endl;
+        }
     return solution;
 }
 bool normalGaussMethod(double** matrix, int n,double* values){
-    
+       
     for(int i = 0; i < n; i++){
         if(check(i,matrix)){
-            cout<<matrix[i][i]<<endl;
             fundamentalGaus(matrix,i,values,n);
         }  
         else{

@@ -135,7 +135,7 @@ double** exEquation2 = new double*[4];
     exEquation3[0][0] = 1; exEquation3[0][1] = 2; exEquation3[0][2] = -1; exEquation3[0][3] = 2;
     exEquation3[1][0] = 1; exEquation3[1][1] = 0;  exEquation3[1][2] = -2; exEquation3[1][3] = 4;
     exEquation3[2][0] = 0; exEquation3[2][1] = -3; exEquation3[2][2] = 1.5;exEquation3[2][3] = 7;
-    exEquation3[3][0] = 0; exEquation3[3][1] = -2; exEquation3[3][2] = 1; exEquation3[3][3] = 6;
+    exEquation3[3][0] = 0; exEquation3[3][1] = -1; exEquation3[3][2] = 1; exEquation3[3][3] = 6;
     exValues3[0] = 0; exValues3[1] = 4; exValues3[2] = 0; exValues3[3] = -1;
     exEquation4[0][0] = 14; exEquation4[0][1] = -13; exEquation4[0][2] = 3; exEquation4[0][3] = -16; exEquation4[0][4] = -42;
     exEquation4[1][0] = 3.5; exEquation4[1][1] = -18; exEquation4[1][2] = 13; exEquation4[1][3] = -23.75; exEquation4[1][4] = -21;
@@ -204,4 +204,10 @@ void bubbleSort(double* solution, int* indexes, int n){
             }
         }
     }
+}
+double checkEpsilon(double* solution, int i){
+    if(abs(solution[i]) < EPSILON){
+        return 0;
+    }
+    else return solution[i];
 }
