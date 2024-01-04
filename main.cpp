@@ -37,28 +37,31 @@ int main(){
    
     switch(method){
         case 1:
+            done = true;
             if(normalGaussMethod(matrix,n,values)){
                 solveEquation(matrix,n,values,indexes);
-                done = true;
+                
             }
             else{
                 cout<<"You have a zero in a main cross\n";
             }
             break;
         case 2:
+            done = true;
             if(gausMethodWithMaxColumn(matrix,n,values,indexes)){
                 solveEquation(matrix,n,values,indexes);
-                done = true;
+                
             }else{
-                cout<<"Something went wrong"<<endl;
+                cout<<"You have a zero in a main cross"<<endl;
             }
             break;
         case 3:
+            done = true;
             if(gausWithMax(matrix, n,values,indexes)){
                 solveEquation(matrix,n,values,indexes);
-                done = true;
+                
             }else{
-                cout<<"Something went wrong"<<endl;
+                cout<<"You have a zero in main cross"<<endl;
             }
             break;
             default:

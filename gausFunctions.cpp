@@ -7,7 +7,7 @@ double* solveEquation(double** matrix, int n, double* values,int* indexes){
     cout<<"Matrix after n-1 steps: "<<endl;
     printData(n,matrix,values);
     if(!check(n-1,matrix)){
-        if(values[n - 1] == 0){
+        if(checkEpsilon(values,n-1)  == 0){
             cout<<"Uklad tozsamosciowy"<<endl;
         }
         else{
@@ -39,7 +39,7 @@ double* solveEquation(double** matrix, int n, double* values,int* indexes){
 }
 bool normalGaussMethod(double** matrix, int n,double* values){
        
-    for(int i = 0; i < n; i++){
+    for(int i = 0; i < n-1; i++){
         if(check(i,matrix)){
             fundamentalGaus(matrix,i,values,n);
         }  
@@ -51,17 +51,18 @@ bool normalGaussMethod(double** matrix, int n,double* values){
 }
 bool gausMethodWithMaxColumn(double** matrix, int n,double* values,int* indexes){
     cout<<"Wybierz kolumne z najwieksza wartoscia w kolumnie"<<endl;
-    for(int i = 0; i < n; i++){
+    for(int i = 0; i < n-1; i++){
         findMaxColumn(matrix,n,values,i);
-        fundamentalGaus(matrix,i,values,n);
-        
+        if(check(i,matrix)){fundamentalGaus(matrix,i,values,n);}
+        else return false;
     }
     return true;
 }
 bool gausWithMax(double** matrix, int n,double* values,int* indexes){
-    for(int i = 0; i < n; i++){
+    for(int i = 0; i < n-1; i++){
         findMaxInAllMatrix(matrix,n,values,i,indexes);
-        fundamentalGaus(matrix,i,values,n);
+        if(check(i,matrix)){fundamentalGaus(matrix,i,values,n);}
+        else return false;
        
     }
     return true;
@@ -71,9 +72,8 @@ void fundamentalGaus(double** matrix, int i,double* values, int n){
             double ratio = matrix[j][i]/matrix[i][i]; //wyznaczanie p w kroku k 
             for(int k = 0; k < n; k++){
                 matrix[j][k] = matrix[j][k] - ratio * matrix[i][k]; //zerowanie trojkata
-                if(k == n - 1){
-                values[j] = values[j] - ratio * values[i];
-                }
+                      
             }
+            values[j] = values[j] - ratio * values[i];
             }
 }

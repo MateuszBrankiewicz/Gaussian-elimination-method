@@ -4,7 +4,7 @@
 using namespace std;
 #define EPSILON 1e-7
 bool check(int n, double** matrix){
-    if(matrix[n][n]==0){
+    if(abs(matrix[n][n])<EPSILON){
         return false;
     }
     else{
@@ -25,54 +25,47 @@ int setData(double**& matrix, double*& values, int*& indexes){
         for(int j = 0; j < n; j++){
             cout<<"Enter the element of the matrix"<<endl;
             cin>>matrix[i][j];
-            if(j == n-1){
+            }
                 cout<<"Enter the value of the equation"<<endl;
                 cin>>values[i];
                 indexes[i] = i;
-            }
-    }
+    
     }
     return n;
 }
 void printData(int n, double** matrix, double* values){
-    
-    cout<<"The matrix is"<<endl;
     for(int i = 0; i < n; i++){
         for(int j = 0; j < n; j++){
-            if(abs(matrix[i][j]) < EPSILON){
-                cout<<"0 \t";
+            abs(matrix[i][j])<EPSILON ? cout<<"0\t" : cout<<matrix[i][j]<<"\t";
             }
-            else cout<<matrix[i][j]<<"\t";
-            if(j == n - 1){
-                cout<<" | \t"<<values[i];
-            }
+             abs(values[i])<EPSILON ? cout<<" | \t"<<"0"<<endl : cout<<" | \t"<<values[i]<<endl;
         }
         cout<<endl;
     }
-}
 
-void findMaxColumn(double** matrix,int n,double* values,int i){
-    cout<<"The max element in the column is "<<abs(matrix[i][i])<<endl;
+
+void findMaxColumn(double** matrix, int n, double* values, int i) {
+    cout << "The max element in the column is " << abs(matrix[i][i]) << endl;
     double max = abs(matrix[i][i]);
-     int index = i;
-     for(int j = i; j < n; j++){
-         if(abs(matrix[j][i]) > max){
-             max = matrix[j][i];
-             index = j;
-         }
-     } 
-     if(index != i){
-     for(int j = i;j<n;j++){
-        swap(matrix[i][j],matrix[index][j]);
-        swap(values[i],values[index]);
-     }}
+    int index = i;
+    for (int j = i; j < n; j++) {
+        if (abs(matrix[j][i]) > max) {
+            max = matrix[j][i];
+            index = j;
+        }
+    }
+    if (index != i) {
+        for (int j = i; j < n; j++) {
+            swap(matrix[i][j], matrix[index][j]);
+        }
+        swap(values[i], values[index]);
+    }
 }
 void findMaxInAllMatrix(double** matrix, int n, double* values, int i, int* indexes) {
     double max = abs(matrix[i][i]);
     int row = i;
     int column = i;
 
- 
     for (int j = i; j < n; j++) {
         for (int k = i; k < n; k++) {
             if (abs(matrix[j][k]) > max) {
@@ -82,11 +75,6 @@ void findMaxInAllMatrix(double** matrix, int n, double* values, int i, int* inde
             }
         }
     }
-
-   
-    cout << "Max Element Index: (" << row << ", " << column << ")" << endl;
-
-
     if (row != i) {
         for (int j = i; j < n; j++) {
             swap(matrix[i][j], matrix[row][j]);
@@ -122,21 +110,28 @@ double** exEquation2 = new double*[4];
     double* exValues2 = new double[4];
     double* exValues3 = new double[4];
     double* exValues4 = new double[5];
+    //STANDARD GAUSS
     exEquation1[0][0] = 1; exEquation1[0][1] = 1; exEquation1[0][2] = 0; exEquation1[0][3] = -3;
     exEquation1[1][0] = 1; exEquation1[1][1] = 4; exEquation1[1][2] = -1; exEquation1[1][3] = -4;
     exEquation1[2][0] = 0.5; exEquation1[2][1] = 0.5; exEquation1[2][2] = -3; exEquation1[2][3] = -5.5;
     exEquation1[3][0] = 1.5; exEquation1[3][1] = 3; exEquation1[3][2] = -5; exEquation1[3][3] = -9;
     exValues1[0] = 1; exValues1[1] = -2; exValues1[2] = 1.5; exValues1[3] = -0.5;
+
+    //MAX IN ALL MATRIX
     exEquation2[0][0] = 2.25; exEquation2[0][1] = -2.5; exEquation2[0][2] = 4; exEquation2[0][3] = -5.25;
     exEquation2[1][0] = -3; exEquation2[1][1] = -7.5; exEquation2[1][2] = 6.5; exEquation2[1][3] = 0;
     exEquation2[2][0] = -6.25; exEquation2[2][1] = -12.5; exEquation2[2][2] = 0.25; exEquation2[2][3] = 5.25;
     exEquation2[3][0] = 9; exEquation2[3][1] = 10; exEquation2[3][2] = 7; exEquation2[3][3] = -21;
     exValues2[0] = -1; exValues2[1] = 17; exValues2[2] = 24.25; exValues2[3] = -33;
+    
+    //STANDARD GAUSS
     exEquation3[0][0] = 1; exEquation3[0][1] = 2; exEquation3[0][2] = -1; exEquation3[0][3] = 2;
     exEquation3[1][0] = 1; exEquation3[1][1] = 0;  exEquation3[1][2] = -2; exEquation3[1][3] = 4;
     exEquation3[2][0] = 0; exEquation3[2][1] = -3; exEquation3[2][2] = 1.5;exEquation3[2][3] = 7;
     exEquation3[3][0] = 0; exEquation3[3][1] = -1; exEquation3[3][2] = 1; exEquation3[3][3] = 6;
     exValues3[0] = 0; exValues3[1] = 4; exValues3[2] = 0; exValues3[3] = -1;
+    
+    //MAX IN ALL MATRIX
     exEquation4[0][0] = 14; exEquation4[0][1] = -13; exEquation4[0][2] = 3; exEquation4[0][3] = -16; exEquation4[0][4] = -42;
     exEquation4[1][0] = 3.5; exEquation4[1][1] = -18; exEquation4[1][2] = 13; exEquation4[1][3] = -23.75; exEquation4[1][4] = -21;
     exEquation4[2][0] = 3.5; exEquation4[2][1] = 3; exEquation4[2][2] = -5.25; exEquation4[2][3] = 9.25; exEquation4[2][4] = 10.5;
